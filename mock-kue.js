@@ -51,14 +51,14 @@ kue.clear = function(){
 }
 
 var callback = function(job, deferred){
-	return function(err){
+	return function(err, result){
 			if(err){
 				job._state = 'failed';
 				deferred.reject(err);
 			}else{
 				job._progress = 100;
 				job._state = 'complete';
-				deferred.resolve();
+				deferred.resolve(result);
 			}
 	};
 }
